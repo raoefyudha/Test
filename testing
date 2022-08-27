@@ -1,0 +1,141 @@
+package universal;
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class Yudha {
+	ArrayList<String> fTypes = new ArrayList<String>();
+	ArrayList<String> fNames = new ArrayList<String>();
+	ArrayList<Double> fCalories = new ArrayList<Double>();
+	ArrayList<Integer> fPrices = new ArrayList<Integer>();
+	
+	
+	public Yudha() {
+		Scanner scan = new Scanner(System.in);
+		int input,fPrice, delete;
+		String fType, fName;
+		double fCalory;
+		do { 
+		System.out.println("\tFoodOrder\n\t=========");
+		System.out.println("1. Insert new food");
+		System.out.println("2. List of food");
+		System.out.println("3. Search food");
+		System.out.println("4. Delete food");
+		System.out.println("5. Exit");
+		
+		System.out.print("Choose: ");
+		input = scan.nextInt(); scan.nextLine();
+		
+		  
+			 if (input == 1) {
+				 do {
+					 System.out.println("Input food's type [Appetizer, Main Course, Dessert]");
+					 fType = scan.nextLine();
+				 } while (!fType.equalsIgnoreCase("Appetizer") && !fType.equalsIgnoreCase("Main Course") && !fType.equalsIgnoreCase("Dessert") );
+				 do {
+					 System.out.println("Input food's name[3-20]");
+					 fName = scan.next(); scan.nextLine();
+				 } while (fName.length() < 3 || fName.length() > 20);
+				 
+				 do {
+					 System.out.println("Input food's calories[1.0..4.0]");
+					 fCalory = scan.nextDouble(); scan.nextLine();
+				 } while(fCalory < 1.0 || fCalory > 4.0);
+				 
+				 do {
+					 System.out.println("Input food's price[10000..50000]");
+					 fPrice = scan.nextInt(); scan.nextLine();
+				 } while(fPrice < 10000 || fPrice > 50000);
+				 
+				 System.out.println("Data has been sucessfully inserted!");
+				 fTypes.add(fType);
+				 fNames.add(fName);
+				 fCalories.add(fCalory);
+				 fPrices.add(fPrice); 
+			 }
+			 
+			 else if (input == 2) {
+				 if (fTypes.isEmpty()) {
+					 System.out.println("No Data!");
+					 scan.nextLine();
+				 }
+				 else {
+					 for(int i = 0; i < fTypes.size(); i++) {
+						 System.out.println("No: " + (i+1) + "");
+						 System.out.println("==========");
+						 System.out.println("1. Type     : " + fTypes.get(i));
+						 System.out.println("2. Name     : " + fNames.get(i));
+						 System.out.println("3. Calories : " + fCalories.get(i));
+						 System.out.println("4. Price    : " + fPrices.get(i));
+					 }
+					 System.out.println();
+					 scan.nextLine();
+				 }
+			 }
+			 
+			 else if (input == 3) {
+				 System.out.println("Input food's name[3-20]");
+				 fName = scan.nextLine();
+				 	if (!fNames.contains(fName)) {
+				 		System.out.println("No Data!");
+						scan.nextLine();
+				 }
+				 	else {
+				 		for(int i = 0; i < fNames.size(); i++) {
+				 			if (fNames.get(i).contains(fName)) {
+				 			System.out.println("No: " + (i+1) + "");
+							System.out.println("==========");
+							System.out.println("1. Type     : " + fTypes.get(i));
+							System.out.println("2. Name     : " + fNames.get(i));
+							System.out.println("3. Calories : " + fCalories.get(i));
+							System.out.println("4. Price    : " + fPrices.get(i));
+				 			}
+				 		}
+				 		System.out.println();
+						scan.nextLine();
+				 	}
+			 }
+			 
+			 else if (input == 4) {
+				 if(fNames.isEmpty()) {
+					 System.out.println("No Data!");
+				 }
+				 else {
+					 for(int i = 0; i < fNames.size(); i++) {
+						 System.out.println("No: " + (i+1) + "");
+						 System.out.println("==========");
+						 System.out.println("1. Type     : " + fTypes.get(i));
+						 System.out.println("2. Name     : " + fNames.get(i));
+						 System.out.println("3. Calories : " + fCalories.get(i));
+						 System.out.println("4. Price    : " + fPrices.get(i));
+					 }
+					 do {
+					 System.out.println("Input number <No> to be deleted [1.." + fTypes.size() + "][0 for cancel] : ");
+					 delete = scan.nextInt(); scan.nextLine();
+					 } while (delete < 1 || delete > fTypes.size());
+					 
+				 }
+			 }
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+		} while(input != 5);
+		
+		scan.close();
+    }
+
+	public static void main(String[] args) {
+		new Yudha();
+
+	}
+	
+	
+}
